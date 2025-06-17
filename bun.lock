@@ -3,6 +3,9 @@
   "workspaces": {
     "": {
       "name": "openai-api-worker",
+      "dependencies": {
+        "@huggingface/inference": "4.0.5",
+      },
       "devDependencies": {
         "@cloudflare/vitest-pool-workers": "^0.8.19",
         "typescript": "^5.5.2",
@@ -83,6 +86,12 @@
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.25.4", "", { "os": "win32", "cpu": "x64" }, "sha512-nOT2vZNw6hJ+z43oP1SPea/G/6AbN6X+bGNhNuq8NtRHy4wsMhw765IKLNmnjek7GvjWBYQ8Q5VBoYTFg9y1UQ=="],
 
     "@fastify/busboy": ["@fastify/busboy@2.1.1", "", {}, "sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA=="],
+
+    "@huggingface/inference": ["@huggingface/inference@4.0.5", "", { "dependencies": { "@huggingface/jinja": "^0.5.0", "@huggingface/tasks": "^0.19.15" } }, "sha512-/Qc45BGrN+FBA3JfdeoHfafxfNShH/dxvOsXbBdcxyxIRIYOyefeiXSlShZGVCaiqYpm+10na28D0YtvjKPTlw=="],
+
+    "@huggingface/jinja": ["@huggingface/jinja@0.5.0", "", {}, "sha512-Ptc03/jGRiYRoi0bUYKZ14MkDslsBRT24oxmsvUlfYrvQMldrxCevhPnT+hfX8awKTT8/f/0ZBBWldoeAcMHdQ=="],
+
+    "@huggingface/tasks": ["@huggingface/tasks@0.19.15", "", {}, "sha512-L4wB/iolKtsErke5yniXXNsGrSuaFmyREpcD4hL/wJox2UKtSEV5gE5gNrlvNaRLBOY41yN7/QmBF4y9byTM6Q=="],
 
     "@img/sharp-darwin-arm64": ["@img/sharp-darwin-arm64@0.33.5", "", { "optionalDependencies": { "@img/sharp-libvips-darwin-arm64": "1.0.4" }, "os": "darwin", "cpu": "arm64" }, "sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ=="],
 
