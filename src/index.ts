@@ -1,18 +1,37 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Bind resources to your worker in `wrangler.jsonc`. After adding bindings, a type definition for the
- * `Env` object can be regenerated with `npm run cf-typegen`.
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+import { InferenceClient } from '@huggingface/inference';
+import { Env } from '../types';
+
+const SYSTEM_PROMPT = `
+You are an assistant that receives a list of ingredients that a user has and suggests a recipe they could make with some or all of those ingredients. You don't need to use every ingredient they mention in your recipe. The recipe can include additional ingredients they didn't mention, but try not to include too many extra ingredients. Format your response in markdown to make it easier to render to a web page
+`;
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello from my OpenAI API Worker');
+		const hf = new InferenceClient(env.HF_API_KEY);
+
+		// const ingredientsString = ingredientsArr.join(', ');
+		const ingredientsString = 'carrot, onion, eggplant';
+
+		try {
+			const chatCompletion = await hf.chatCompletion({
+				model: 'mistralai/Mixtral-8x7B-Instruct-v0.1',
+				messages: [
+					{ role: 'system', content: SYSTEM_PROMPT },
+					{
+						role: 'user',
+						content: `I have ${ingredientsString}. Please give me a recipe you'd recommend I make!`,
+					},
+				],
+				max_tokens: 1024,
+			});
+
+			const response = chatCompletion.choices[0].message.content;
+			return new Response(JSON.stringify(response));
+
+		} catch (error) {
+			console.error(error);
+			return new Response('Something went wrong', { status: 500 });
+		}
+
 	},
 } satisfies ExportedHandler<Env>;
