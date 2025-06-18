@@ -1,7 +1,7 @@
 > ℹ️ This project uses [bun](https://bun.sh)
 
 ## Local development
-> ⚠️ Before starting create `.dev.vars` file with `HF_API_KEY="<key>"` api key.
+> ⚠️ Before starting create `.dev.vars` file with Hugging Face API key (e.g. `HF_API_KEY="<key>"`).
 
 - Run `bun run dev` in your terminal to start a development server
 - Open a browser tab at http://localhost:8787/ to see this worker in action

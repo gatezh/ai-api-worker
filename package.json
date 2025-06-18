@@ -1,5 +1,5 @@
 {
-	"name": "openai-api-worker",
+	"name": "ai-api-worker",
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {

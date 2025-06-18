@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "openai-api-worker",
+	"name": "ai-api-worker",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-06-07",
 	"observability": {
