@@ -1,4 +1,5 @@
 import { InferenceClient } from '@huggingface/inference';
+import {  } from '@huggingface/tasks';
 import { Env } from '../types';
 
 const SYSTEM_PROMPT = `
@@ -18,7 +19,9 @@ export default {
 			return new Response(null, { headers: corsHeaders })
 		}
 
-		const hf = new InferenceClient(env.HF_API_KEY);
+		const hf = new InferenceClient(env.HF_API_KEY, {
+			endpointUrl: "https://gateway.ai.cloudflare.com/v1/23fa6ebbdb145dbf47f95d219cfcb95d/chef-claude/huggingface"
+		});
 
 		const ingredientsString = await request.json();
 
