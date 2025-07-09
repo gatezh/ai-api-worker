@@ -19,6 +19,7 @@ export default {
 			return new Response(null, { headers: corsHeaders })
 		}
 
+		// Using Cloudflare's AI Gateway to access Hugging Face Inference API
 		const hf = new InferenceClient(env.HF_API_KEY, {
 			endpointUrl: "https://gateway.ai.cloudflare.com/v1/23fa6ebbdb145dbf47f95d219cfcb95d/chef-claude/huggingface"
 		});
@@ -42,8 +43,9 @@ export default {
 			return new Response(JSON.stringify(response), { headers: corsHeaders });
 
 		} catch (error) {
-			console.error(error);
-			return new Response('Something went wrong', { headers: corsHeaders, status: 500 });
+			console.error('Error fetching recipe:', error);
+			const errorMessage = error instanceof Error ? error.message : String(error);
+			return new Response(JSON.stringify({error: errorMessage}), { status: 500, headers: corsHeaders });
 		}
 
 	},
